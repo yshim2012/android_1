@@ -1,0 +1,4 @@
+1459143286699	Extracts string '请输入的内容' into R.string.editcontent
+1459143438053	Extracts string '发送' into R.string.buttontext
+1459153073764	Extract method 'sender'
+1459153852997	Extract method 'received'
