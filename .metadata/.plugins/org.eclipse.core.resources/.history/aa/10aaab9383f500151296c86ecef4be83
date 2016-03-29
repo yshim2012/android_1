@@ -1,0 +1,45 @@
+package com.udp.example;
+
+public class UDPClient {
+	import java.io.IOException;
+	 4 import java.net.DatagramPacket;
+	 5 import java.net.DatagramSocket;
+	 6 import java.net.InetAddress;
+	 7 import java.net.SocketException;
+	 8 import java.lang.String;
+	 9 
+	10 public class UDPClient extends Thread{
+	11 
+	12     public String m_serverIP;
+	13     public String m_text;
+	14     
+	15     public  UDPClient(String strServerIP, String strText)
+	16     {
+	17         m_serverIP = strServerIP;
+	18         m_text = strText;
+	19     }
+	20     
+	21     @Override
+	22     public void run() {
+	23         // TODO Auto-generated method stub
+	24         int TIMEOUT = 3000;
+	25         int servPort = 8800;
+	26         byte[] bytesToSend = m_text.getBytes();//"test_client".getBytes();
+	27 
+	28         try {
+	29             InetAddress serverAddress = InetAddress.getByName(m_serverIP);
+	30             DatagramSocket socket = new DatagramSocket();
+	31             socket.setSoTimeout(TIMEOUT);
+	32             
+	33             DatagramPacket sendPacket = new DatagramPacket(bytesToSend,bytesToSend.length,serverAddress,servPort);
+	34             socket.send(sendPacket);
+	35                 
+	36             socket.close();
+	37         } catch (SocketException e){
+	38             e.printStackTrace();
+	39         }catch(IOException e){
+	40             e.printStackTrace();
+	41         }
+	42     }
+	43 }
+}
